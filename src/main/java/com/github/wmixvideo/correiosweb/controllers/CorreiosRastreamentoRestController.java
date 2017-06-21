@@ -23,7 +23,12 @@ public class CorreiosRastreamentoRestController {
     }
 
     @RequestMapping(value = "/rastrear/json/{objeto}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    Sroxml rastrearObjeto(@PathVariable String objeto) {
+    Sroxml rastrearObjetoJson(@PathVariable String objeto) {
+        return correiosRastreador.consultaObjeto(objeto);
+    }
+
+    @RequestMapping(value = "/rastrear/xml/{objeto}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+    Sroxml rastrearObjetoXml(@PathVariable String objeto) {
         return correiosRastreador.consultaObjeto(objeto);
     }
 }
