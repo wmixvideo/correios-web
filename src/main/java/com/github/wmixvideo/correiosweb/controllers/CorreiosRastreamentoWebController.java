@@ -4,26 +4,27 @@ import br.com.correios.webservice.rastro.Sroxml;
 import com.github.wmixvideo.correios.WSCorreiosRastreador;
 import com.github.wmixvideo.correiosweb.CorreiosWebConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-@RestController
-public class CorreiosRastreamentoRestController {
+@Controller
+public class CorreiosRastreamentoWebController {
 
     private final WSCorreiosRastreador correiosRastreador;
 
     @Autowired
-    public CorreiosRastreamentoRestController(CorreiosWebConfig config) {
+    public CorreiosRastreamentoWebController(CorreiosWebConfig config) {
         correiosRastreador = new WSCorreiosRastreador(config.getUsuario(), config.getSenha());
     }
 
-    @RequestMapping(value = "/rastrear/json/{objeto}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    Sroxml rastrearObjeto(@PathVariable String objeto) {
-        return correiosRastreador.consultaObjeto(objeto);
+    @RequestMapping(value = "/rastrear/html/{objeto}", method = RequestMethod.GET)
+    public String rastrearObjeto(Map<String, Object> model, @PathVariable String objeto) {
+        final Sroxml sroxml = correiosRastreador.consultaObjeto(objeto);
+        model.put("message", sroxml.getVersao());
+        return "rastreamento";
     }
 }
