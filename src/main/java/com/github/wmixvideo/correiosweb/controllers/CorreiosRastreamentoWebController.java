@@ -1,6 +1,6 @@
 package com.github.wmixvideo.correiosweb.controllers;
 
-import br.com.correios.webservice.rastro.Sroxml;
+
 import com.github.wmixvideo.correios.WSCorreiosRastreador;
 import com.github.wmixvideo.correiosweb.CorreiosWebConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +23,7 @@ public class CorreiosRastreamentoWebController {
 
     @RequestMapping(value = "/rastrear/html/{objeto}", method = RequestMethod.GET)
     public String rastrearObjeto(Map<String, Object> model, @PathVariable String objeto) {
-        final Sroxml sroxml = correiosRastreador.consultaObjeto(objeto);
-        model.put("message", sroxml.getVersao());
+        model.put("sroxml", correiosRastreador.consultaObjeto(objeto));
         return "rastreamento";
     }
 }
