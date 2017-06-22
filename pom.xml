@@ -46,7 +46,7 @@
         <dependency>
             <groupId>com.github.wmixvideo</groupId>
             <artifactId>correios</artifactId>
-            <version>1.2.2-SNAPSHOT</version>
+            <version>1.2.3-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
