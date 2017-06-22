@@ -2,45 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Rastreamento</title>
+        <link th:href="@{/css/estilo.css}" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <h1>Resultado do rastramento</h1>
-        <p th:text="${sroxml.versao}"></p>
-        <p th:text="${sroxml.qtd}"></p>
-        <p th:text="${sroxml.tipoPesquisa}"></p>
-        <p th:text="${sroxml.tipoResultado}"></p>
-        <p th:text="Nenhum evento cadastrado!" th:if="${sroxml.objeto.empty}"></p>
+        <h1 th:text="${objeto}">Resultado do rastramento</h1>
         <div th:each="objeto : ${sroxml.objeto}" th:unless="${sroxml.objeto.empty}">
-            <p th:text="${objeto.numero}"></p>
-            <p th:text="${objeto.sigla}"></p>
-            <p th:text="${objeto.nome}"></p>
-            <p th:text="${objeto.categoria}"></p>
             <p th:text="${objeto.erro}"></p>
             <table border="1" th:unless="${objeto.evento.empty}">
                 <thead>
                     <tr>
-                        <th>Data</th>
-                        <th>Hora</th>
-                        <th>Tipo</th>
-                        <th>Status</th>
-                        <th>Descricao</th>
-                        <th>CEP</th>
-                        <th>UF</th>
-                        <th>Cidade</th>
-                        <th>Local</th>
+                        <th class="minsize">Data</th>
+                        <th class="minsize">Hora</th>
+                        <th class="minsize">UF</th>
+                        <th class="minsize">Cidade</th>
+                        <th>Evento</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="evento : ${objeto.evento}">
-                        <td th:text="${evento.data}"></td>
-                        <td th:text="${evento.hora}"></td>
-                        <td th:text="${evento.tipo}"></td>
-                        <td th:text="${evento.status}"></td>
+                        <td th:text="${evento.data}" class="minsize"></td>
+                        <td th:text="${evento.hora}" class="minsize"></td>
+                        <td th:text="${evento.uf}" class="minsize"></td>
+                        <td th:text="${#strings.capitalize(#strings.toLowerCase(evento.cidade))}" th:title="${evento.local}" class="minsize"></td>
                         <td th:text="${evento.descricao}"></td>
-                        <td th:text="${evento.codigo}"></td>
-                        <td th:text="${evento.uf}"></td>
-                        <td th:text="${evento.cidade}"></td>
-                        <td th:text="${evento.local}"></td>
                     </tr>
                 </tbody>
             </table>

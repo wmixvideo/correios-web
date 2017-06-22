@@ -23,6 +23,7 @@ public class CorreiosRastreamentoWebController {
 
     @RequestMapping(value = "/rastrear/html/{objeto}", method = RequestMethod.GET)
     public String rastrearObjeto(Map<String, Object> model, @PathVariable String objeto) {
+        model.put("objeto", objeto);
         model.put("sroxml", correiosRastreador.consultaObjeto(objeto));
         return "rastreamento";
     }
