@@ -1,3 +1,5 @@
+![GitHub CI](https://github.com/wmixvideo/correios-web/workflows/Build%20project/badge.svg)
+
 # Sistema de rastreamento de pacotes
 Expõe os serviços dos Correios de forma mais amigável ao desenvolvedor, nos formatos XML, JSON e HTML.
 
